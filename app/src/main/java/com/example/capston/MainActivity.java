@@ -1,39 +1,66 @@
 package com.example.capston;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import static com.example.capston.R.drawable.ic_play_circle;
+
 public class MainActivity extends AppCompatActivity {
 
-    TextView loginText, signText, userText, logoutText;
+    VideoView videoView;
+    Uri videoUri;
+    public static int VIDEO_CAPTURE =1;
+    Button playButton, captureButton;
+
+    VideoViewActivity videoViewActivity;
+
+    ImageButton imageButton;
+    TextView loginText, userText;
     ImageView imageView;
     BottomNavigationView bottomNavigationView;
+    EditText loginEmail, loginPass;
+    Fragment fragmentLogin;
+    UserDetails userDetails;
+    FloatingActionButton floatingActionButton;
+
+    FirebaseAuth firebaseAuth;
+    DatabaseReference databaseReference;
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -43,16 +70,50 @@ public class MainActivity extends AppCompatActivity {
     FragmentProfile fragmentProfile;
     FragmentManager fragmentManager;
 
-    FirebaseAuth firebaseAuth;
-    DatabaseReference databaseReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        videoViewActivity = new VideoViewActivity();
+//
+//        videoView = videoViewActivity.findViewById(R.id.video_view);
+        imageButton = findViewById(R.id.show_video);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, VideoViewActivity.class);
+//                intent.putExtra("video", videoUri);
+                startActivity(intent);
+            }
+        });
+//        playButton = findViewById(R.id.play);
+//        captureButton = findViewById(R.id.capture);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("User");
+
+        userDetails = new UserDetails();
+
+        fragmentLogin = new LoginFragment();
+
+//        loginPass = view.findViewById(R.id.password);
+
         final Toolbar toolbar = findViewById(R.id.tool);
         navigationView = findViewById(R.id.nav);
+        floatingActionButton = findViewById(R.id.floating);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, VideoViewActivity.class);
+                startActivity(intent);
+               // }
+            }
+        });
 
         setSupportActionBar(toolbar);
 
@@ -116,37 +177,43 @@ public class MainActivity extends AppCompatActivity {
 
         loginText = headerView.findViewById(R.id.txt1);
         userText = headerView.findViewById(R.id.txt3);
-        logoutText = headerView.findViewById(R.id.logout);
+
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if(firebaseUser != null)
+        {
+            loginText.setText("Logout >>");
+             final String uid = firebaseUser.getUid();
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String name = dataSnapshot.child(uid).child("name").getValue().toString();
+                    userText.setText("Welcome "+name);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
 
         loginText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AuthenticationActivity.class);
-                intent.putExtra("k", 1);
-                startActivity(intent);
 
-                  if(!email.isEmpty()) {
-                      databaseReference = FirebaseDatabase.getInstance().getReference().child("User");
+                if(loginText.getText() != "Logout >>"){
+                    Intent intent = new Intent(MainActivity.this, AuthenticationActivity.class);
+                    startActivity(intent);
+                }
 
-                      databaseReference.addValueEventListener(new ValueEventListener() {
-                          @Override
-                          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                              String name = dataSnapshot.child(email).child("name").getValue().toString();
-                              userText.setText(name);
-                          }
-
-                          @Override
-                          public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                          }
-                      });
-                  }
-//                loginText.setVisibility(View.INVISIBLE);
-//                signText.setVisibility(View.INVISIBLE);
-//                logoutText.setVisibility(View.VISIBLE);
+                else
+                {
+                  loginText.setText("Login");
+                  userText.setText(null);
+                  firebaseAuth.signOut();
+                }
             }
         });
-
 
     }
 
@@ -161,4 +228,47 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        Intent intent = getIntent();
+//        String name = intent.getStringExtra("name");
+//        if(name != null)
+//        {
+////            userText.setVisibility(View.VISIBLE);
+//            userText.setText("welcome "+name);
+//        }
+//    }
+
+//    public void capture(View view)
+//    {
+//        Intent intent = new Intent(android.provider.MediaStore.ACTION_VIDEO_CAPTURE);
+//        startActivity(intent);
+//    }
+//
+//    public void play(View view)
+//    {
+//        videoView.setVideoURI(videoUri);
+//        videoView.start();
+//    }
+
+
+//        @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if(requestCode == VIDEO_CAPTURE && resultCode == RESULT_OK)
+//        {
+//             videoUri = data.getData();
+//
+//             if(videoUri != null)
+//             {
+////                 videoView.setVideoURI(videoUri);
+//                 imageButton.setBackgroundResource(R.drawable.ic_play_circle);
+//
+//             }
+//        }
+//    }
 }

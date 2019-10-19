@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,6 +34,10 @@ public class LoginFragment extends Fragment {
    Button buttonLogin;
    FirebaseAuth firebaseAuth;
    LinearLayout linearLayout;
+   TextView signUpText;
+   FragmentManager fragmentManager;
+   FragmentTransaction fragmentTransaction;
+
 
     public LoginFragment() {
         // Required empty public constructor
@@ -45,11 +52,13 @@ public class LoginFragment extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+        fragmentManager = getFragmentManager();
+
         editText1 = view.findViewById(R.id.email);
         editText2 = view.findViewById(R.id.password);
         buttonLogin = view.findViewById(R.id.login);
         linearLayout = view.findViewById(R.id.linear_layout);
-
+        signUpText = view.findViewById(R.id.new_user);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +93,14 @@ public class LoginFragment extends Fragment {
                                 }
                             });
                 }
+            }
+        });
+
+        signUpText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frag, new SignupFragment()).commit();
             }
         });
 

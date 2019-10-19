@@ -109,6 +109,7 @@
                 android:background="#bb002f"/>
 
             <TextView
+                android:id="@+id/have_acc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Already have Account/Login ->"

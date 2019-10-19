@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VideoViewActivity">
+
+<!--    <Toolbar-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?attr/actionBarSize"/>-->
+
+    <VideoView
+        android:layout_width="match_parent"
+        android:layout_height="540dp"
+        android:id="@+id/video_view"
+        />
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/video_view"
+        android:layout_margin="20dp">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_cloud_upload"
+        android:id="@+id/upload"
+        android:layout_below="@id/video_view"
+        android:layout_margin="10dp"/>
+
+    <ImageButton
+        android:id="@+id/download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_cloud_download_black_24dp"
+        android:layout_below="@id/video_view"
+        android:layout_toRightOf="@id/upload"
+        android:layout_margin="10dp"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_play_circle"
+        android:id="@+id/play"
+        android:layout_below="@id/video_view"
+        android:layout_toRightOf="@id/download"
+         android:layout_margin="10dp"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_pause"
+        android:id="@+id/resume"
+        android:layout_below="@id/video_view"
+        android:layout_toRightOf="@id/play"
+        android:layout_margin="10dp"/>
+
+    <ImageButton
+        android:id="@+id/record"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_videocam"
+        android:layout_below="@id/video_view"
+        android:layout_toRightOf="@id/resume"
+        android:layout_margin="10dp"/>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_below="@id/linear"
+        android:max="100"
+        android:min="0"
+        android:padding="15dp" />
+
+
+</RelativeLayout>

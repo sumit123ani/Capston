@@ -20,7 +20,18 @@
             android:id="@+id/tool"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#3700B3"/>
+            android:background="#3700B3">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/show_video"
+                android:layout_gravity="end"/>
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+
     </LinearLayout>
 
 
@@ -36,6 +47,22 @@
             android:layout_alignParentTop="true"
             />
 
+<!--        <VideoView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:id="@+id/video_view"-->
+<!--            />-->
+
+
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/play"-->
+<!--            android:text="play"-->
+<!--            android:layout_below="@id/video_view"-->
+<!--            android:layout_toRightOf="@id/video_view"-->
+<!--            android:onClick="play"/>-->
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,6 +70,18 @@
             android:id="@+id/bottom_nav"
             android:layout_above="@id/fragment"
             app:menu="@menu/bottom_navigation"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_camera"
+            app:pressedTranslationZ="12dp"
+            android:layout_above="@id/bottom_nav"
+            android:layout_marginBottom="50dp"
+            android:layout_marginRight="20dp"/>
 
     </RelativeLayout>
 
