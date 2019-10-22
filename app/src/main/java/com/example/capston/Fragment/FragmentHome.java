@@ -1,4 +1,4 @@
-package com.example.capston;
+package com.example.capston.Fragment;
 
 
 import android.os.Bundle;
@@ -9,14 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.capston.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentProfile extends Fragment {
+public class FragmentHome extends Fragment {
 
 
-    public FragmentProfile() {
+    public FragmentHome() {
         // Required empty public constructor
     }
 
@@ -25,7 +27,11 @@ public class FragmentProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_fragment_home, container, false);
+
+
+
+        return view;
     }
 
 }

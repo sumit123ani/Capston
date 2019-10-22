@@ -1,7 +1,6 @@
 package com.example.capston;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -11,13 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +23,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.example.capston.Fragment.FragmentHome;
+import com.example.capston.Fragment.FragmentPhoto;
+import com.example.capston.Fragment.FragmentProfile;
+import com.example.capston.Fragment.LoginFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -38,8 +37,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import static com.example.capston.R.drawable.ic_play_circle;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -79,19 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        videoViewActivity = new VideoViewActivity();
 //
-//        videoView = videoViewActivity.findViewById(R.id.video_view);
-        imageButton = findViewById(R.id.show_video);
-
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, VideoViewActivity.class);
-//                intent.putExtra("video", videoUri);
-                startActivity(intent);
-            }
-        });
-//        playButton = findViewById(R.id.play);
-//        captureButton = findViewById(R.id.capture);
+//        videoView = videoViewActivity.findViewById(R.id.video_view
 
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("User");

@@ -1,4 +1,4 @@
-package com.example.capston;
+package com.example.capston.Fragment;
 
 
 import android.content.Intent;
@@ -18,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.capston.MainActivity;
+import com.example.capston.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;

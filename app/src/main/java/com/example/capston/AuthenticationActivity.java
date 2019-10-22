@@ -6,6 +6,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
+import com.example.capston.Fragment.LoginFragment;
+
 public class AuthenticationActivity extends AppCompatActivity {
 
     FragmentManager fragmentManager;
