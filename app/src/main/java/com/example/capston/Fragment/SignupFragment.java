@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,7 @@ import static android.content.ContentValues.TAG;
  */
 public class SignupFragment extends Fragment {
 
-    EditText editText1, editText2, editTextName, editTextMobile, editTextAdhar;
+    EditText editText1, editText2, editTextName, editTextMobile, editTextAdhar, editTextAddress, editTextdob;
     Button buttonSignUp;
     ScrollView scrollView;
     TextView accountText, userName;
@@ -86,6 +87,8 @@ public class SignupFragment extends Fragment {
         editTextName = view.findViewById(R.id.name);
         editTextMobile = view.findViewById(R.id.mobile);
         editTextAdhar = view.findViewById(R.id.adhar);
+        editTextAddress = view.findViewById(R.id.address);
+        editTextdob = view.findViewById(R.id.dob);
 
         buttonSignUp = view.findViewById(R.id.sign_up);
         scrollView = view.findViewById(R.id.scroll);
@@ -124,28 +127,34 @@ public class SignupFragment extends Fragment {
         String email = editText1.getText().toString();
         String password = editText2.getText().toString();
 
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "createUser:onComplete:" + task.isSuccessful());
+        if(validateForm()) {
 
-                        if (task.isSuccessful()) {
-                            onAuthSuccess(task.getResult().getUser());
-                        } else {
-                            Toast.makeText(getContext(), "Sign Up Failed",
-                                    Toast.LENGTH_SHORT).show();
+            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            Log.d(TAG, "createUser:onComplete:" + task.isSuccessful());
+
+                            if (task.isSuccessful()) {
+                                onAuthSuccess(task.getResult().getUser());
+                            } else {
+                                Toast.makeText(getContext(), "Sign Up Failed",
+                                        Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+        }
     }
 
         public void onAuthSuccess(FirebaseUser user){
             String username = editTextName.getText().toString();
             String mobile = editTextMobile.getText().toString();
             String adhar = editTextAdhar.getText().toString();
+            String addres = editTextAddress.getText().toString();
+            String doB = editTextdob.getText().toString();
+            String email = editText1.getText().toString();
 
-            writeNewUser(user.getUid(), username, user.getEmail(), mobile, adhar);
+            writeNewUser(user.getUid(), username, email, mobile, adhar, addres, doB);
 
             // Go to MainActivit
             Intent intent = new Intent(getActivity(), MainActivity.class);
@@ -162,34 +171,77 @@ public class SignupFragment extends Fragment {
             }
         }
 
-//        private boolean validateForm () {
-//            boolean result = true;
-//            if (TextUtils.isEmpty(editText1.getText().toString())) {
-//                editText1.setError("Required");
-//                result = false;
-//            } else {
-//                editText1.setError(null);
-//            }
-//
-//            if (TextUtils.isEmpty(editText2.getText().toString())) {
-//                editText2.setError("Required");
-//                result = false;
-//            } else {
-//                editText2.setError(null);
-//            }
-//
-//            return result;
-//        }
+        private boolean validateForm () {
+            boolean result = true;
+            if (TextUtils.isEmpty(editTextName.getText().toString())) {
+                editTextName.setError("Name Required");
+                result = false;
+            } else {
+                editTextName.setError(null);
+            }
+
+            if (TextUtils.isEmpty(editTextMobile.getText().toString())) {
+                editTextMobile.setError("Mobile N0. Required");
+                result = false;
+            }
+            else if (editTextMobile.getText().toString().length() != 10){
+                  editTextMobile.setError("ente 10 digits");
+                  result = false;}
+            else {
+                editTextMobile.setError(null);
+            }
+
+            if (TextUtils.isEmpty(editTextAdhar.getText().toString())) {
+                editTextAdhar.setError("Mobile N0. Required");
+                result = false;
+            }
+            else if (editTextAdhar.getText().toString().length() != 16){
+                 editTextAdhar.setError("enetr 16 digits");
+                 result = false; }
+
+            else {
+                editText2.setError(null);
+            }
+
+            if (TextUtils.isEmpty(editTextAddress.getText().toString())) {
+                editTextAddress.setError("Address Required");
+                result = false;
+            } else {
+                editTextAddress.setError(null);
+            }
+
+            if (TextUtils.isEmpty(editTextdob.getText().toString())) {
+                editTextdob.setError("Dob Required");
+                result = false;
+            } else {
+                editTextdob.setError(null);
+            }
+
+            if (TextUtils.isEmpty(editText1.getText().toString())) {
+                editText1.setError("Address Required");
+                result = false;
+            } else {
+                editText1.setError(null);
+            }
+
+            if (TextUtils.isEmpty(editText2.getText().toString())) {
+                editText2.setError("Address Required");
+                result = false;
+            } else {
+                editText2.setError(null);
+            }
+
+            return result;
+        }
 
         // [START basic_write]
-        private void writeNewUser (String userId, String name, String email, String mobile, String adhar){
-            UserDetails user = new UserDetails(email, name, mobile, adhar);
+        private void writeNewUser (String userId, String name, String email, String mobile, String adhar, String address, String doB){
+            UserDetails user = new UserDetails(email, name, mobile, adhar, address, doB);
 
-            databaseReference.child(userId).setValue(user);
+            databaseReference.child(userId).child("UserDetail").setValue(user);
         }
 
     }
-
 
 
 //    public void storeUser()

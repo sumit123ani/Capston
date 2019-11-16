@@ -15,65 +15,65 @@
         android:elevation="15dp"
         app:cardBackgroundColor="#8eacbb">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:gravity="center_horizontal"
-        android:paddingTop="50dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:gravity="center_horizontal"
+            android:paddingTop="50dp">
 
-    <TextView
-        android:id="@+id/txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:textStyle="bold"
-        android:textSize="25dp"
-        android:layout_margin="20dp"
-        android:layout_marginLeft="40dp"
-        android:textColor="#bb002f"/>
+            <TextView
+                android:id="@+id/txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:layout_margin="20dp"
+                android:layout_marginLeft="40dp"
+                android:textColor="#bb002f"/>
 
-     <EditText
-         android:id="@+id/email"
-         android:layout_width="250dp"
-         android:layout_height="wrap_content"
-         android:layout_below="@id/txt"
-         android:hint="email"
-         android:inputType="textEmailAddress"
-         android:layout_marginBottom="20dp"/>
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt"
+                android:hint="email"
+                android:inputType="textEmailAddress"
+                android:layout_marginBottom="20dp"/>
 
 
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/email"
-            android:hint="password"
-            android:inputType="numberPassword"
-            android:layout_marginBottom="15dp"/>
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/email"
+                android:hint="password"
+                android:inputType="numberPassword"
+                android:layout_marginBottom="15dp"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/login"
-        android:layout_below="@id/password"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="30dp"
-        android:text="login"
-        android:background="#bb002f"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/login"
+                android:layout_below="@id/password"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="30dp"
+                android:text="login"
+                android:background="#bb002f"/>
 
-        <TextView
-            android:id="@+id/new_user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New User Sign Up ->"
-            android:textStyle="bold"
-            android:layout_below="@id/login"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="35dp"
-            android:textColor="#bb002f"/>
+            <TextView
+                android:id="@+id/new_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New User Sign Up ->"
+                android:textStyle="bold"
+                android:layout_below="@id/login"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="35dp"
+                android:textColor="#bb002f"/>
 
-    </RelativeLayout>
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 

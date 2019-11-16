@@ -62,19 +62,28 @@
                 android:layout_marginBottom="20dp"/>
 
             <EditText
-                android:id="@+id/pan_card"
+                android:id="@+id/address"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/adhar"
-                android:hint="PAN No."
-                android:inputType="phone"
+                android:hint="Address"
+                android:inputType="text"
+                android:layout_marginBottom="20dp"/>
+
+            <EditText
+                android:id="@+id/pin_code"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/address"
+                android:hint="Address"
+                android:inputType="text"
                 android:layout_marginBottom="20dp"/>
 
             <EditText
                 android:id="@+id/dob"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/pan_card"
+                android:layout_below="@id/pin_code"
                 android:hint="DOB"
                 android:inputType="phone"
                 android:layout_marginBottom="20dp"/>

@@ -1,6 +1,5 @@
-<resources>
-    <string name="app_name">Capston</string>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+<resources>
+    <string name="app_name">News Report</string>
 </resources>

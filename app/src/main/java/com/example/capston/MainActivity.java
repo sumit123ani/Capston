@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, VideoViewActivity.class);
                 startActivity(intent);
-               // }
+                // }
             }
         });
 
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("News Reporter");
+//        actionBar.setBackgroundDrawable;
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -117,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment, fragmentHome);
         fragmentTransaction.commit();
-
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -146,17 +147,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-          drawerLayout = findViewById(R.id.drawer);
+        drawerLayout = findViewById(R.id.drawer);
 
 
-          navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-              @Override
-              public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                  Toast.makeText(MainActivity.this, menuItem.getTitle()+"clicked", Toast.LENGTH_SHORT).show();
-                  drawerLayout.closeDrawers();
-                  return true;
-              }
-          });
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Toast.makeText(MainActivity.this, menuItem.getTitle()+"clicked", Toast.LENGTH_SHORT).show();
+                drawerLayout.closeDrawers();
+                return true;
+            }
+        });
 
         View headerView = navigationView.getHeaderView(0);
 
@@ -167,11 +168,11 @@ public class MainActivity extends AppCompatActivity {
         if(firebaseUser != null)
         {
             loginText.setText("Logout >>");
-             final String uid = firebaseUser.getUid();
+            final String uid = firebaseUser.getUid();
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String name = dataSnapshot.child(uid).child("name").getValue().toString();
+                    String name = dataSnapshot.child(uid).child("UserDetail").child("name").getValue().toString();
                     userText.setText("Welcome "+name);
                 }
 
@@ -193,9 +194,9 @@ public class MainActivity extends AppCompatActivity {
 
                 else
                 {
-                  loginText.setText("Login");
-                  userText.setText(null);
-                  firebaseAuth.signOut();
+                    loginText.setText("Login");
+                    userText.setText(null);
+                    firebaseAuth.signOut();
                 }
             }
         });

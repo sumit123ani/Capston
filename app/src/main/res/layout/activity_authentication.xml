@@ -8,11 +8,11 @@
     android:orientation="vertical"
     android:id="@+id/linear_layout">
 
-   <androidx.appcompat.widget.Toolbar
-       android:layout_width="match_parent"
-       android:layout_height="?attr/actionBarSize"
-       android:id="@+id/toolBar"
-       android:background="#3700B3"/>
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/toolBar"
+        android:background="#3700B3"/>
 
     <FrameLayout
         android:layout_width="match_parent"

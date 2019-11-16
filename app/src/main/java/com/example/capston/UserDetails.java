@@ -1,35 +1,37 @@
 package com.example.capston;
 
-import androidx.annotation.NonNull;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.security.PublicKey;
+import android.net.Uri;
 
 public class UserDetails {
 
-    String name;
-    String Mobile_No;
-    String Adhar_no;
-    String email;
-
+    private String name;
+    private String Mobile_No;
+    private String Adhar_No;
+    private String email;
+    private String address;
+    private String doB;
+    private String url;
 
     public UserDetails()
     {
 
     }
 
-    public UserDetails(String email, String name, String Mobile_No, String Adhar_no)
+    public UserDetails(String url)
+    {
+        this.url = url;
+    }
+
+    public UserDetails(String email, String name, String Mobile_No, String Adhar_No, String address, String doB)
 
     {
-        this.email = email;
         this.name = name;
         this.Mobile_No = Mobile_No;
-        this.Adhar_no = Adhar_no;
+        this.Adhar_No = Adhar_No;
+        this.address = address;
+        this.doB = doB;
+        this.email = email;
     }
 
     public String getName() {
@@ -41,11 +43,22 @@ public class UserDetails {
     }
 
     public String getAdhar_no() {
-        return Adhar_no;
+        return Adhar_No;
     }
 
-    public String getId() {
+    public String getEmail() {
         return email;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public String getDoB() {
+        return doB;
+    }
+
+    public String getUrl() {
+        return url;
+    }
 }
